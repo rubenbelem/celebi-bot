@@ -1,0 +1,49 @@
+{
+    "name": "meliuz",
+    "version": "1.0.0",
+    "license": "MIT",
+    "description": "Meliuz technical test",
+    "main": "./src/index.js",
+    "scripts": {
+        "test": "nodemon",
+        "start": "node ./src/index.js",
+        "lint": "./node_modules/.bin/eslint --quiet src/",
+        "prestart": "npm run lint"
+    },
+    "author": "Ruben Belem",
+    "dependencies": {
+        "@hapi/joi": "^16.1.5",
+        "axios": "^0.19.0",
+        "bluebird": "^3.5.5",
+        "body-parser": "^1.19.0",
+        "continuation-local-storage": "^3.2.1",
+        "cors": "^2.8.5",
+        "dotenv": "^8.0.0",
+        "eslint-plugin-jsdoc": "^15.9.2",
+        "express": "^4.17.1",
+        "lodash-es": "^4.17.11",
+        "morgan": "^1.9.1",
+        "node-telegram-bot-api": "^0.40.0",
+        "path": "^0.12.7",
+        "pokedex-promise-v2": "^3.2.0",
+        "request-promise": "^4.2.4",
+        "sequelize": "^5.18.1",
+        "sqlite3": "^4.1.0"
+    },
+    "devDependencies": {
+        "eslint": "^6.1.0",
+        "eslint-config-google": "^0.14.0",
+        "eslint-config-prettier": "^6.3.0",
+        "eslint-plugin-import": "^2.18.2",
+        "eslint-plugin-prettier": "^3.1.1",
+        "husky": "^3.0.5",
+        "nodemon": "^1.19.2",
+        "prettier": "^1.18.2"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "yarn run lint",
+            "pre-push": "yarn run lint"
+        }
+    }
+}

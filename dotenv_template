@@ -1,0 +1,4 @@
+POKEAPI_PORT=
+DATABASE_NAME="meliuz"
+API_PORT=
+POKEAPI_HOST="localhost"

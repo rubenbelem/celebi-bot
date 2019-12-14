@@ -1,0 +1,26 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true
+    },
+    "extends": ["eslint:recommended"],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "extends": ["eslint:recommended", "plugin:prettier/recommended"],
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "plugins": ["prettier"],
+    "rules": {
+        "no-plusplus": "off",
+        "no-param-reassign": "off",
+        "no-await-in-loop": "warn",
+        "no-unused-labels": "warn",
+        "no-unused-expressions": "warn",
+        "no-unused-vars": ["warn", { "argsIgnorePattern": "next" }]
+    }
+}
