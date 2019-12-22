@@ -1,6 +1,5 @@
 const { bibleBooks } = require("../utils/constants");
 const _ = require("lodash");
-const DbErrors = require("../errors/database");
 const { CustomError, CustomInternalError } = require("../errors");
 
 class ReadingService {
@@ -13,4 +12,4 @@ class ReadingService {
     }
 }
 
-module.exports = {};
+module.exports = ReadingService;

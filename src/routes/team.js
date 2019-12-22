@@ -5,7 +5,7 @@ const { wrapAsync } = require("../utils/wrappers");
 const { PokemonService, TeamService } = require("../services");
 const { Team } = require("../schemas");
 const _ = require("lodash");
-const Errors = require("../errors/index");
+//const Errors = require("../errors/index");
 const httpCodes = require("../utils/http-status");
 
 function hasDuplicates(a) {
@@ -17,14 +17,6 @@ router.post(
     "/",
     wrapAsync(async (req, res, next) => {
         let team = req.body;
-
-        // checking wether pokemon_ids has any duplicate values
-        if (hasDuplicates(team.pokemon_ids)) {
-            throw new Errors.CustomError({
-                status: httpCodes.BAD_REQUEST,
-                message: "The pokemon_ids array can't have any duplicate values."
-            });
-        }
 
         team = await TeamService.insert(team);
         team = team.dataValues;

@@ -2,19 +2,16 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 let path = require("path");
-let fs = require("fs");
 
-const db = require("./models");
 const { parseUserName } = require("./utils");
-const requestPromise = require("request-promise");
 
 const telegramBot = require(`node-telegram-bot-api`);
 
-const TOKEN = `1030919218:AAHeLyr0-ksWqDOdDGe7yA2I30XIsM-S4gE`;
+const TOKEN = process.env.BOT_TOKEN;
 const bot = new telegramBot(TOKEN, { polling: true });
 const starterKitFilePath = path.join(__dirname, "..\\files\\starter_kit");
 
-const { ReadingService } = require("./services/reading");
+const { ReadingService, TelegramService } = require("./services");
 
 async function sendStarterKit(chat) {
     await bot.sendMessage(chat.id, `https://youtu.be/hwBhA0mRlRs`);
@@ -49,9 +46,9 @@ bot.onText(/\/kit_iniciante/, async (message, match) => {
 bot.onText(/\/leitura (.*)/, async (message, match) => {
     let username = parseUserName(message);
     let reading = match[1];
-
     await bot.sendMessage(message.chat.id, `Muito bem, ${username}! Sua leitura de "${reading}" será registrada!`);
-    await ReadingService.registerReading(message, reading);
+    let fullChat = await TelegramService.getMembersOfChat(message.chat.id);
+    //await ReadingService.registerReading(message, reading);
 });
 
 console.log("Bot iniciado com sucesso!");

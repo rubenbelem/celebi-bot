@@ -1,5 +1,3 @@
-const HttpStatus = require("../utils/http-status");
-
 const _ = require("lodash");
 
 /**
@@ -13,8 +11,8 @@ class CustomError extends Error {
         super(customErrorObject.message);
         this.name = this.constructor.name + (customErrorObject.code == undefined ? "-" + customErrorObject.code : ""); // ensures that the error name will be the same as the class name
 
-        if (customErrorObject.status == undefined) this.status = HttpStatus.INTERNAL_SERVER_ERROR;
-        else this.status = customErrorObject.status;
+        //if (customErrorObject.status == undefined) this.status = HttpStatus.INTERNAL_SERVER_ERROR;
+        //else this.status = customErrorObject.status;
 
         this.code = customErrorObject.code;
 
@@ -55,7 +53,7 @@ class JoiValidationError extends CustomError {
     }
 
     constructor(joiErrorObject, message = "Joi Validation Error") {
-        super({ message, status: HttpStatus.UNPROCESSABLE_ENTITY });
+        super({ message, status: 422 });
         this.data = this.parseJoiError(joiErrorObject);
     }
 }
@@ -69,7 +67,7 @@ class JoiValidationError extends CustomError {
 class QueryJoiValidationError extends JoiValidationError {
     constructor(joiErrorObject) {
         super(joiErrorObject, `The query params did not match the Joi Schema.`);
-        this.status = HttpStatus.BAD_REQUEST;
+        this.status = 422;
     }
 }
 
@@ -81,7 +79,7 @@ class QueryJoiValidationError extends JoiValidationError {
  */
 class VerifyAuthError extends CustomError {
     constructor(error, message = "Failed to verify JWT token") {
-        super({ message, status: HttpStatus.UNPROCESSABLE_ENTITY });
+        super({ message, status: 422 });
     }
 }
 
@@ -94,7 +92,7 @@ class VerifyAuthError extends CustomError {
 class BodyJoiValidationError extends JoiValidationError {
     constructor(joiErrorObject) {
         super(joiErrorObject, `The body object did not match the Joi Schema.`);
-        this.status = HttpStatus.BAD_REQUEST;
+        this.status = 422;
     }
 }
 

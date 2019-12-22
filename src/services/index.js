@@ -1,4 +1,4 @@
 module.exports = {
-    PokemonService: require("./pokemon"),
-    TeamService: require("./team")
+    ReadingService: require("./reading"),
+    TelegramService: require("./telegram")
 };

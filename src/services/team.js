@@ -1,6 +1,5 @@
 const db = require("../models");
 const _ = require("lodash");
-const DbErrors = require("../errors/database");
 const { CustomError, CustomInternalError } = require("../errors");
 const PokemonService = require("./pokemon");
 
@@ -18,8 +17,6 @@ module.exports = {
             throw new CustomInternalError(err);
         });
 
-        if (team == null) throw new CustomError(DbErrors.DB002);
-
         let pokemonIds = team.get("pokemon_ids");
 
         // fetching pokémon data
@@ -34,7 +31,5 @@ module.exports = {
         let team = await db.teams.destroy({ where: { id } }).catch(err => {
             throw new CustomInternalError(err);
         });
-
-        if (team == 0) throw new CustomError(DbErrors.DB002);
     }
 };
